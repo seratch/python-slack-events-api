@@ -5,12 +5,14 @@ python:
   - "3.4"
   - "3.5"
   - "3.6"
+  - "3.7"
+  - "3.8"
 install:
-  - travis_retry pip install -r requirements.txt
+  - travis_retry python setup.py install
   - travis_retry pip install flake8
   - travis_retry pip install -r requirements-dev.txt
 script:
   - flake8 slackeventsapi
-  - py.test --cov-report= --cov=slackeventsapi tests
+  - pytest --cov-report= --cov=slackeventsapi tests
 after_success:
   - codecov -e $TRAVIS_PYTHON_VERSION
